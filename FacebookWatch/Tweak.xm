@@ -1,7 +1,23 @@
+@interface FBStreamListCollectionView: UICollectionView
+    - (id) dataSource; // FBComponentCollectionViewDataSource
+@end
+
+@interface FBComponentCollectionViewDataSource
+    - (id) scrollEventHandler; // FBVideoHomeFeedViewController
+@end
+
 %hook FBStreamListCollectionView
     - (NSInteger) numberOfSections {
         NSInteger number = %orig;
-        if (number > 3) { number = 3; }
+        if (
+            self.dataSource &&
+            [self.dataSource isKindOfClass: %c(FBComponentCollectionViewDataSource)] &&
+            ((FBComponentCollectionViewDataSource*) self.dataSource).scrollEventHandler &&
+            [((FBComponentCollectionViewDataSource*) self.dataSource).scrollEventHandler isKindOfClass: %c(FBVideoHomeFeedViewController)] &&
+            number > 2
+        ) {
+            number = 2;
+        }
         return number;
     }
 %end
