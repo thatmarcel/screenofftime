@@ -1,0 +1,9 @@
+Package: com.thatmarcel.tweaks.screenofftime
+Name: ScreenOffTime
+Depends: mobilesubstrate
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Screen off.
+Maintainer: Marcel Braun
+Author: Marcel Braun
+Section: Tweaks
